@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+  <rect width="300" height="400" fill="#0a0a0f"/>
+  <rect width="300" height="400" fill="#7C3D5F" opacity="0.3"/>
+  <circle cx="150" cy="150" r="70" fill="#7C3D5F" opacity="0.6"/>
+  <circle cx="150" cy="150" r="45" fill="#7C3D5F" opacity="0.8"/>
+  <ellipse cx="150" cy="310" rx="100" ry="60" fill="#7C3D5F" opacity="0.5"/>
+  <text x="150" y="370" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#d4a017" opacity="0.8">Nominee</text>
+  <rect x="10" y="10" width="280" height="380" fill="none" stroke="#d4a017" stroke-width="1" opacity="0.3" rx="4"/>
+</svg>

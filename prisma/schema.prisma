@@ -1,0 +1,222 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Auth & Users ────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  displayName   String
+  role          String    @default("user") // admin | editor | user
+  avatarUrl     String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  picks           Pick[]
+  finalTenPick    FinalTenPick?
+  computedScore   ComputedScore?
+  auditLogs       AuditLog[]
+  winnersDrafted  WinnerDraft[]
+  winnersPublished WinnerPublished[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  createdAt    DateTime @default(now())
+}
+
+// ─── Awards Structure ────────────────────────────────────────────
+
+model AwardsYear {
+  id          String   @id @default(cuid())
+  label       String   // e.g., "98th"
+  year        Int      // e.g., 2026
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model GlobalSettings {
+  id              String   @id @default("singleton")
+  ballotOpensAt   DateTime
+  ballotClosesAt  DateTime
+  timezone        String   @default("America/Los_Angeles")
+  awardsYearLabel String   @default("98th")
+  awardsYear      Int      @default(2026)
+  updatedAt       DateTime @updatedAt
+}
+
+model Cluster {
+  id          String     @id @default(cuid())
+  name        String     // e.g., "The Crown"
+  icon        String     @default("crown") // icon identifier
+  description String     @default("")
+  maxPoints   Int
+  sortOrder   Int
+  sweepType   String     @default("full") // full | partial | none
+  sweepBonus  Int        @default(0)
+  partialThreshold Int?  // for partial sweep (e.g., 3 of 4)
+  partialBonus     Int?  // bonus for partial (e.g., 5)
+
+  categories  Category[]
+}
+
+model Category {
+  id                String    @id @default(cuid())
+  name              String
+  clusterId         String
+  cluster           Cluster   @relation(fields: [clusterId], references: [id], onDelete: Cascade)
+  basePoints        Int
+  eligibleForFinalTen Boolean @default(false)
+  sortOrder         Int
+
+  nominees          Nominee[]
+  picks             Pick[]
+  finalTenPicks     FinalTenPick[]
+  winnerDraft       WinnerDraft?
+  winnerPublished   WinnerPublished?
+  insightMetrics    InsightMetric[]
+  tickerItems       TickerItem[]
+}
+
+model Nominee {
+  id          String    @id @default(cuid())
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  displayName String
+  filmTitle   String?
+  imageUrl    String?
+  sortOrder   Int       @default(0)
+
+  picks           Pick[]
+  finalTenPicks   FinalTenPick[]
+  winnerDraft     WinnerDraft[]
+  winnerPublished WinnerPublished[]
+  insightMetrics  InsightMetric[]
+}
+
+// ─── User Picks ──────────────────────────────────────────────────
+
+model Pick {
+  id         String    @id @default(cuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  nomineeId  String
+  nominee    Nominee   @relation(fields: [nomineeId], references: [id], onDelete: Cascade)
+  lockedAt   DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@unique([userId, categoryId])
+}
+
+model FinalTenPick {
+  id         String    @id @default(cuid())
+  userId     String    @unique
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  nomineeId  String
+  nominee    Nominee   @relation(fields: [nomineeId], references: [id], onDelete: Cascade)
+  lockedAt   DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+// ─── Winners ─────────────────────────────────────────────────────
+
+model WinnerDraft {
+  id         String   @id @default(cuid())
+  categoryId String   @unique
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  nomineeId  String
+  nominee    Nominee  @relation(fields: [nomineeId], references: [id], onDelete: Cascade)
+  updatedBy  String
+  updatedByUser User  @relation(fields: [updatedBy], references: [id])
+  updatedAt  DateTime @updatedAt
+}
+
+model WinnerPublished {
+  id          String   @id @default(cuid())
+  categoryId  String   @unique
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  nomineeId   String
+  nominee     Nominee  @relation(fields: [nomineeId], references: [id], onDelete: Cascade)
+  publishedBy String
+  publishedByUser User @relation(fields: [publishedBy], references: [id])
+  publishedAt DateTime @default(now())
+}
+
+// ─── Scores ──────────────────────────────────────────────────────
+
+model ComputedScore {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalScore    Int      @default(0)
+  crownPoints   Int      @default(0)
+  correctCount  Int      @default(0)
+  breakdownJson String   @default("{}") // JSON blob with per-cluster details
+  updatedAt     DateTime @updatedAt
+}
+
+// ─── Insights ────────────────────────────────────────────────────
+
+model InsightMetric {
+  id          String    @id @default(cuid())
+  scope       String    // "category" | "nominee"
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  nomineeId   String?
+  nominee     Nominee?  @relation(fields: [nomineeId], references: [id], onDelete: Cascade)
+  key         String    // e.g., "total_nominations", "prior_wins"
+  label       String    // Display label
+  value       String    // String representation
+  sourceName  String?
+  sourceUrl   String?
+  retrievedAt DateTime  @default(now())
+  lastUpdated DateTime  @updatedAt
+}
+
+// ─── Ticker ──────────────────────────────────────────────────────
+
+model TickerItem {
+  id          String    @id @default(cuid())
+  title       String
+  snippet     String
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  sourceName  String?
+  sourceUrl   String?
+  retrievedAt DateTime  @default(now())
+  publishedAt DateTime?
+  isTrivia    Boolean   @default(false)
+  isSpotlight Boolean   @default(false)
+  isActive    Boolean   @default(true)
+}
+
+// ─── Audit ───────────────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  action     String   // e.g., "publish_winners", "update_nominee"
+  entityType String   // e.g., "WinnerPublished", "Nominee"
+  entityId   String?
+  beforeJson String?
+  afterJson  String?
+  createdAt  DateTime @default(now())
+}
