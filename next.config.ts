@@ -5,7 +5,10 @@ import os from "os";
 // Redirect Next.js cache outside OneDrive to avoid file-lock warnings
 const cacheDir = path.join(os.tmpdir(), "oscar-ballot-98-next-cache");
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
+  basePath: isProd ? "/oscars" : "",
   distDir: ".next",
   cacheHandler: undefined,
   cacheMaxMemorySize: 0,
