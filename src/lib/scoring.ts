@@ -3,7 +3,7 @@
  *
  * Guilds + Scoring (max 190 base + 10 Final Ten = 200)
  *
- * Guild 1: "The Crown"          – 10 pts each (4 cats = 40) + 20 full sweep = 60
+ * Guild 1: "The Crown"      – 10 pts each (4 cats = 40) + 20 full sweep = 60
  * Guild 2: "The Performers"     – 8 pts each  (2 cats = 16) + 10 full sweep = 26
  * Guild 3: "The Authors"        – 8 pts each  (2 cats = 16) + 12 full sweep = 28
  * Guild 4: "Global & Animated"  – 7 pts each  (2 cats = 14) + 10 full sweep = 24
