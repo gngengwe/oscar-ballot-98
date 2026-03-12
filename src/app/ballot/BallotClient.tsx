@@ -324,7 +324,6 @@ export default function BallotClient({
                   {cluster.categories.map((category) => {
                     const selectedId = picks[category.id];
                     const winnerId = winnersMap.get(category.id);
-                    const isCraft = cluster.sortOrder === 6;
 
                     return (
                       <div key={category.id}>
@@ -362,7 +361,7 @@ export default function BallotClient({
                         )}
 
                         {/* Nominee Cards */}
-                        <div className={`grid gap-2 ${isCraft ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"}`}>
+                        <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
                           {category.nominees.map((nominee) => {
                             const isSelected = selectedId === nominee.id;
                             const isWinner = winnerId === nominee.id;
@@ -382,32 +381,6 @@ export default function BallotClient({
                                   isWrong ? "!border-red-400/50 !bg-red-900/10" : ""
                                 } ${isWinner && !isSelected ? "!border-green-500/30 !bg-green-900/10" : ""} disabled:cursor-default`}
                               >
-                                {/* Image placeholder for non-craft clusters */}
-                                {!isCraft && (
-                                  <div className="aspect-[3/4] rounded-md bg-cinema-700/50 mb-2 overflow-hidden">
-                                    {nominee.imageUrl ? (
-                                      <img
-                                        src={nominee.imageUrl}
-                                        alt={nominee.displayName}
-                                        className="w-full h-full object-cover"
-                                      />
-                                    ) : (
-                                      <div className="w-full h-full flex items-center justify-center text-cinema-500">
-                                        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
-                                        </svg>
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-
-                                {/* Craft icon tile */}
-                                {isCraft && (
-                                  <div className="flex items-center justify-center h-8 mb-1">
-                                    <div className={`w-6 h-6 rounded-full ${isSelected ? "bg-gold-500/30" : "bg-cinema-600/30"}`} />
-                                  </div>
-                                )}
-
                                 <p className="text-xs font-medium text-cinema-100 line-clamp-2">
                                   {nominee.displayName}
                                 </p>

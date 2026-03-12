@@ -12,10 +12,16 @@ interface TickerItemData {
   isSpotlight: boolean;
 }
 
+interface NominationCount {
+  film: string;
+  count: number;
+}
+
 export default function TickerSidebar() {
   const [news, setNews] = useState<TickerItemData[]>([]);
   const [trivia, setTrivia] = useState<TickerItemData[]>([]);
   const [spotlight, setSpotlight] = useState<TickerItemData | null>(null);
+  const [numbers, setNumbers] = useState<NominationCount[]>([]);
   const [currentTriviaIdx, setCurrentTriviaIdx] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -28,15 +34,16 @@ export default function TickerSidebar() {
           setNews(data.news || []);
           setTrivia(data.trivia || []);
           setSpotlight(data.spotlight || null);
+          setNumbers(data.numbers || []);
         }
       } catch {
-        // Graceful fallback: keep whatever we have
+        // Graceful fallback
       } finally {
         setLoading(false);
       }
     }
     fetchData();
-    const interval = setInterval(fetchData, 5 * 60 * 1000); // refresh every 5 min
+    const interval = setInterval(fetchData, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -61,6 +68,8 @@ export default function TickerSidebar() {
     );
   }
 
+  const hasContent = news.length > 0 || trivia.length > 0 || spotlight || numbers.length > 0;
+
   return (
     <aside className="w-72 shrink-0 space-y-4 hidden lg:block">
       {/* Spotlight Card */}
@@ -72,14 +81,47 @@ export default function TickerSidebar() {
               Category Spotlight
             </h3>
           </div>
-          <p className="text-sm font-medium text-cinema-100">
-            {spotlight.title}
-          </p>
+          <p className="text-sm font-medium text-cinema-100">{spotlight.title}</p>
           <p className="text-xs text-cinema-300 mt-1">{spotlight.snippet}</p>
         </div>
       )}
 
-      {/* Today&apos;s Trivia */}
+      {/* By the Numbers */}
+      {numbers.length > 0 && (
+        <div className="bg-cinema-800/80 border border-cinema-600/30 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-gold-400 text-lg">📊</span>
+            <h3 className="text-gold-400 font-semibold text-sm uppercase tracking-wide">
+              By the Numbers
+            </h3>
+          </div>
+          <p className="text-[10px] text-cinema-500 uppercase tracking-wide mb-2">
+            Ballot nominations per film
+          </p>
+          <div className="space-y-2">
+            {numbers.map((item, i) => {
+              const maxCount = numbers[0]?.count || 1;
+              const pct = Math.round((item.count / maxCount) * 100);
+              return (
+                <div key={i}>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-xs text-cinema-200 truncate max-w-[180px]">{item.film}</span>
+                    <span className="text-xs font-bold text-gold-400 ml-1">{item.count}</span>
+                  </div>
+                  <div className="h-1 bg-cinema-700 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-gold-600 to-gold-400 rounded-full"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Oscar Trivia */}
       {trivia.length > 0 && (
         <div className="bg-cinema-800/80 border border-cinema-600/30 rounded-xl p-4">
           <div className="flex items-center gap-2 mb-3">
@@ -109,7 +151,7 @@ export default function TickerSidebar() {
         </div>
       )}
 
-      {/* News Headlines */}
+      {/* Oscar News */}
       {news.length > 0 && (
         <div className="bg-cinema-800/80 border border-cinema-600/30 rounded-xl p-4">
           <div className="flex items-center gap-2 mb-3">
@@ -120,15 +162,10 @@ export default function TickerSidebar() {
           </div>
           <div className="space-y-3 max-h-64 overflow-y-auto">
             {news.slice(0, 6).map((item) => (
-              <div
-                key={item.id}
-                className="border-b border-cinema-700/50 pb-2 last:border-0"
-              >
-                <p className="text-xs font-medium text-cinema-100 line-clamp-2">
-                  {item.title}
-                </p>
+              <div key={item.id} className="border-b border-cinema-700/50 pb-2 last:border-0">
+                <p className="text-xs font-medium text-cinema-100 line-clamp-2">{item.title}</p>
                 {item.sourceName && (
-                  <p className="text-[10px] text-cinema-400 mt-0.5 flex items-center gap-1">
+                  <p className="text-[10px] text-cinema-400 mt-0.5">
                     {item.sourceUrl ? (
                       <a
                         href={item.sourceUrl}
@@ -150,11 +187,9 @@ export default function TickerSidebar() {
       )}
 
       {/* Empty state */}
-      {news.length === 0 && trivia.length === 0 && !spotlight && (
+      {!hasContent && (
         <div className="bg-cinema-800/50 border border-cinema-700/30 rounded-xl p-4 text-center">
-          <p className="text-cinema-400 text-sm">
-            🎬 Oscar news and trivia coming soon!
-          </p>
+          <p className="text-cinema-400 text-sm">🎬 Oscar news and trivia coming soon!</p>
         </div>
       )}
     </aside>
