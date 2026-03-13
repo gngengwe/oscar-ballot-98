@@ -1,16 +1,17 @@
 /**
  * Oscar Ballot 2026 – Deterministic Scoring Engine
  *
- * Guilds + Scoring (max 190 base + 10 Final Ten = 200)
+ * Guilds + Scoring (200 guild pts max + 10 Final Ten bonus)
  *
- * Guild 1: "The Crown"      – 10 pts each (4 cats = 40) + 20 full sweep = 60
- * Guild 2: "The Performers"     – 8 pts each  (2 cats = 16) + 10 full sweep = 26
- * Guild 3: "The Authors"        – 8 pts each  (2 cats = 16) + 12 full sweep = 28
- * Guild 4: "Global & Animated"  – 7 pts each  (2 cats = 14) + 10 full sweep = 24
- * Guild 5: "Soundtrack"         – 6 pts each  (2 cats = 12) + 8  full sweep = 20
- * Guild 6: "The Crafts"         – 4 pts each  (5 cats = 20) + partial 5 (4/5) or 12 (5/5) = 32
- * Final 10: +10 if correct = 10
- * Total max: 190 guild pts + 10 Final Ten = 200
+ * Guild 1: "The Crown"      – 10 pts each (4 cats = 40) + 20 full sweep  = 60
+ * Guild 2: "The Performers" –  7 pts each (3 cats = 21) +  9 full sweep  = 30
+ * Guild 3: "The Authors"    –  8 pts each (2 cats = 16) +  8 full sweep  = 24
+ * Guild 4: "The Eye"        –  5 pts each (4 cats = 20) + partial 5 (3/4) or 10 (4/4) = 30
+ * Guild 5: "The Cut"        –  3 pts each (5 cats = 15) + partial 4 (3/5) or  9 (5/5) = 24
+ * Guild 6: "The Globe"      –  5 pts each (3 cats = 15) +  7 full sweep  = 22
+ * Guild 7: "The Shorts"     –  2 pts each (3 cats =  6) +  4 full sweep  = 10
+ * Final 10: +10 if correct (bonus wager, not included in guild max)
+ * Total max: 200 guild pts + 10 Final Ten = 210
  */
 
 export interface PickData {

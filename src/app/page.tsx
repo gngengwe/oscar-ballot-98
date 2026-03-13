@@ -19,10 +19,10 @@ const clusters = [
   {
     name: "The Performers",
     icon: "🎭",
-    categories: "Supporting Actor, Supporting Actress",
-    base: "8 pts each",
-    bonus: "+10 sweep bonus",
-    max: 26,
+    categories: "Supporting Actor, Supporting Actress, Casting",
+    base: "7 pts each",
+    bonus: "+9 sweep bonus",
+    max: 30,
     color: "from-rose-500/20 to-rose-900/10 border-rose-500/40",
     accent: "text-rose-400",
   },
@@ -31,41 +31,50 @@ const clusters = [
     icon: "✍️",
     categories: "Original Screenplay, Adapted Screenplay",
     base: "8 pts each",
-    bonus: "+12 sweep bonus",
-    max: 28,
+    bonus: "+8 sweep bonus",
+    max: 24,
     color: "from-blue-500/20 to-blue-900/10 border-blue-500/40",
     accent: "text-blue-400",
   },
   {
-    name: "Global & Animated",
-    icon: "🌍",
-    categories: "International Feature, Animated Feature",
-    base: "7 pts each",
-    bonus: "+10 sweep bonus",
+    name: "The Eye",
+    icon: "👁️",
+    categories: "Cinematography, Production Design, Costume Design, Makeup & Hairstyling",
+    base: "5 pts each",
+    bonus: "+5 (3/4) or +10 sweep",
+    max: 30,
+    color: "from-violet-500/20 to-violet-900/10 border-violet-500/40",
+    accent: "text-violet-400",
+  },
+  {
+    name: "The Cut",
+    icon: "✂️",
+    categories: "Film Editing, Original Score, Original Song, Sound, Visual Effects",
+    base: "3 pts each",
+    bonus: "+4 (3/5) or +9 sweep",
     max: 24,
+    color: "from-cyan-500/20 to-cyan-900/10 border-cyan-500/40",
+    accent: "text-cyan-400",
+  },
+  {
+    name: "The Globe",
+    icon: "🌍",
+    categories: "International Feature, Animated Feature, Documentary Feature",
+    base: "5 pts each",
+    bonus: "+7 sweep bonus",
+    max: 22,
     color: "from-emerald-500/20 to-emerald-900/10 border-emerald-500/40",
     accent: "text-emerald-400",
   },
   {
-    name: "Soundtrack",
-    icon: "🎵",
-    categories: "Original Score, Original Song",
-    base: "6 pts each",
-    bonus: "+8 sweep bonus",
-    max: 20,
-    color: "from-purple-500/20 to-purple-900/10 border-purple-500/40",
-    accent: "text-purple-400",
-  },
-  {
-    name: "The Crafts",
-    icon: "🎬",
-    categories: "Cinematography, Production Design, Costume, Editing, Casting ✨",
-    base: "4 pts each",
-    bonus: "+5 (4/5) or +12 (5/5)",
-    max: 32,
-    color: "from-cyan-500/20 to-cyan-900/10 border-cyan-500/40",
-    accent: "text-cyan-400",
-    isNew: true,
+    name: "The Shorts",
+    icon: "🎞️",
+    categories: "Animated Short, Documentary Short, Live Action Short",
+    base: "2 pts each",
+    bonus: "+4 sweep bonus",
+    max: 10,
+    color: "from-indigo-500/20 to-indigo-900/10 border-indigo-500/40",
+    accent: "text-indigo-400",
   },
 ];
 
@@ -97,7 +106,7 @@ export default async function LandingPage() {
                 98th Academy Awards Pick&apos;em
               </p>
               <p className="text-cinema-400 max-w-2xl mx-auto mb-8">
-                Pick your winners across 17 categories grouped into 6 prestige
+                Pick your winners across 24 categories grouped into 7 prestige
                 guilds. Earn sweep bonuses, wager on a Final 10 pick, and
                 compete for the top of the leaderboard.
               </p>
@@ -212,7 +221,7 @@ export default async function LandingPage() {
               If wrong: +0. This bonus is separate from your guild picks.
             </p>
             <div className="inline-flex items-center gap-2 text-xs text-cinema-400 bg-cinema-900/40 px-3 py-1 rounded-full">
-              190 base + 10 Final = 200 maximum
+              200 guild points + Final 10 bonus
             </div>
           </div>
 
@@ -229,13 +238,14 @@ export default async function LandingPage() {
               </thead>
               <tbody>
                 {[
-                  ["👑 The Crown", "40", "+20 (all 4)", "60"],
-                  ["🎭 The Performers", "16", "+10 (both)", "26"],
-                  ["✍️ The Authors", "16", "+12 (both)", "28"],
-                  ["🌍 Global & Animated", "14", "+10 (both)", "24"],
-                  ["🎵 Soundtrack", "12", "+8 (both)", "20"],
-                  ["🎬 The Crafts ✨", "20", "+5 (4/5) or +12 (5/5)", "32"],
-                  ["🎯 Final 10", "—", "—", "10"],
+                  ["👑 The Crown",      "40", "+20 (all 4)",            "60"],
+                  ["🎭 The Performers", "21", "+9 (all 3)",             "30"],
+                  ["✍️ The Authors",    "16", "+8 (both)",              "24"],
+                  ["👁️ The Eye",        "20", "+5 (3/4) / +10 (all 4)", "30"],
+                  ["✂️ The Cut",        "15", "+4 (3/5) / +9 (all 5)",  "24"],
+                  ["🌍 The Globe",      "15", "+7 (all 3)",             "22"],
+                  ["🎞️ The Shorts",     "6",  "+4 (all 3)",             "10"],
+                  ["🎯 Final 10",       "—",  "—",                      "+10"],
                 ].map(([cluster, base, sweep, max], i) => (
                   <tr
                     key={i}
@@ -249,17 +259,14 @@ export default async function LandingPage() {
                 ))}
                 <tr className="bg-gold-600/10">
                   <td className="p-3 font-bold text-gold-400">Total</td>
-                  <td className="p-3 text-center">118</td>
-                  <td className="p-3 text-center text-gold-400">+72</td>
+                  <td className="p-3 text-center">133</td>
+                  <td className="p-3 text-center text-gold-400">+67</td>
                   <td className="p-3 text-center font-bold text-gold-400 text-lg">
                     200
                   </td>
                 </tr>
               </tbody>
             </table>
-            <div className="px-3 py-2 border-t border-cinema-700/30 text-xs text-cinema-500">
-              ✨ Best Casting is a new category introduced for the 98th Academy Awards
-            </div>
           </div>
 
           {/* Tiebreakers */}

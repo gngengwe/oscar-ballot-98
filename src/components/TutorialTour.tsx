@@ -7,23 +7,24 @@ const STEPS = [
     id: "welcome",
     icon: "🏆",
     title: "Welcome to Oscar Ballot 2026",
-    body: "This is your guide to the 98th Academy Awards pick'em game. Pick the winners across 17 categories, earn bonus points, and climb the leaderboard. Let's walk through how it works.",
+    body: "This is your guide to the 98th Academy Awards pick'em game. Pick the winners across 24 categories, earn bonus points, and climb the leaderboard. Let's walk through how it works.",
     position: "center",
     visual: null,
   },
   {
     id: "clusters",
     icon: "🗂️",
-    title: "6 Prestige Guilds",
-    body: "Categories are grouped into 6 themed guilds. You pick one winner per category. Score points for each correct pick — and earn a bonus if you sweep an entire guild.",
+    title: "7 Prestige Guilds",
+    body: "Categories are grouped into 7 themed guilds. You pick one winner per category. Score points for each correct pick — and earn a bonus if you sweep an entire guild.",
     position: "center",
     visual: [
       { icon: "👑", name: "The Crown", desc: "Best Picture, Director, Actor, Actress" },
-      { icon: "🎭", name: "The Performers", desc: "Supporting Actor & Actress" },
+      { icon: "🎭", name: "The Performers", desc: "Supporting Actor, Supporting Actress, Casting" },
       { icon: "✍️", name: "The Authors", desc: "Original & Adapted Screenplay" },
-      { icon: "🌍", name: "Global & Animated", desc: "International & Animated Feature" },
-      { icon: "🎵", name: "Soundtrack", desc: "Original Score & Original Song" },
-      { icon: "🎬", name: "The Crafts", desc: "Cinematography, Design, Costume, Editing, Casting" },
+      { icon: "👁️", name: "The Eye", desc: "Cinematography, Design, Costume, Makeup" },
+      { icon: "✂️", name: "The Cut", desc: "Editing, Score, Song, Sound, VFX" },
+      { icon: "🌍", name: "The Globe", desc: "International, Animated & Documentary Feature" },
+      { icon: "🎞️", name: "The Shorts", desc: "Animated, Documentary & Live Action Short" },
     ],
   },
   {
@@ -44,9 +45,9 @@ const STEPS = [
   },
   {
     id: "crafts",
-    icon: "🎬",
-    title: "The Crafts — Partial Sweep",
-    body: "The Crafts guild is special. It has 5 categories worth 4 pts each. Because it's harder to sweep, there's a partial sweep: get 4 out of 5 correct for +5 bonus, or all 5 for the full +12 bonus.",
+    icon: "👁️",
+    title: "Partial Sweeps — The Eye & The Cut",
+    body: "Two guilds have partial sweeps. The Eye (4 categories) and The Cut (5 categories) each reward you if you're nearly perfect: hit 3 or more correct in the guild to unlock a partial bonus, or sweep all of them for the full bonus.",
     position: "center",
     visual: "crafts-table",
   },
@@ -54,7 +55,7 @@ const STEPS = [
     id: "final10",
     icon: "🎯",
     title: "The Final 10 Bonus",
-    body: "After making your 17 picks, you get one extra wager. Choose any category from The Crown and double-down on your pick. Get it right: +10 bonus points. Get it wrong: nothing lost. Max total: 200 pts.",
+    body: "After making your 24 picks, you get one extra wager. Choose any category from The Crown and double-down on your pick. Get it right: +10 bonus points. Get it wrong: nothing lost.",
     position: "center",
     visual: "final10",
   },
@@ -105,11 +106,12 @@ function StepVisual({ id }: { id: string }) {
         </div>
         {[
           ["👑 Crown", "+20 (all 4)", "60"],
-          ["🎭 Performers", "+10 (both)", "26"],
-          ["✍️ Authors", "+12 (both)", "28"],
-          ["🌍 Global", "+10 (both)", "24"],
-          ["🎵 Soundtrack", "+8 (both)", "20"],
-          ["🎬 Crafts", "+12 (all 5)", "32"],
+          ["🎭 Performers", "+9 (all 3)", "30"],
+          ["✍️ Authors", "+8 (both)", "24"],
+          ["👁️ Eye", "+5 (3/4) / +10 (all 4)", "30"],
+          ["✂️ Cut", "+4 (3/5) / +9 (all 5)", "24"],
+          ["🌍 Globe", "+7 (all 3)", "22"],
+          ["🎞️ Shorts", "+4 (all 3)", "10"],
         ].map(([name, bonus, max]) => (
           <div key={name} className="px-3 py-1.5 grid grid-cols-3 border-t border-gold-600/10 text-cinema-200">
             <span>{name}</span>
@@ -123,23 +125,33 @@ function StepVisual({ id }: { id: string }) {
 
   if (id === "crafts-table") {
     return (
-      <div className="mt-4 space-y-2 text-xs">
-        <div className="rounded-lg border border-cyan-500/30 overflow-hidden">
-          <div className="bg-cyan-500/10 px-3 py-2 font-medium text-cyan-300">5 Crafts Categories × 4 pts each = 20 base</div>
-          {["Cinematography", "Production Design", "Costume Design", "Film Editing", "Best Casting ✨"].map((c) => (
-            <div key={c} className="px-3 py-1.5 flex justify-between border-t border-cyan-500/10 text-cinema-200">
-              <span>{c}</span><span className="text-cyan-400">4 pts</span>
+      <div className="mt-4 space-y-3 text-xs">
+        <div className="rounded-lg border border-violet-500/30 overflow-hidden">
+          <div className="bg-violet-500/10 px-3 py-2 font-medium text-violet-300">👁️ The Eye — 4 cats × 5 pts = 20 base</div>
+          {["Cinematography", "Production Design", "Costume Design", "Makeup & Hairstyling"].map((c) => (
+            <div key={c} className="px-3 py-1.5 flex justify-between border-t border-violet-500/10 text-cinema-200">
+              <span>{c}</span><span className="text-violet-400">5 pts</span>
             </div>
           ))}
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-lg border border-gold-600/20 bg-gold-600/5 px-3 py-2 text-center">
-            <div className="text-gold-400 font-bold text-base">+5</div>
-            <div className="text-cinema-300">4 out of 5 correct</div>
+          <div className="px-3 py-1.5 flex justify-between border-t border-violet-500/20 bg-violet-500/5 text-cinema-300">
+            <span>3 of 4 correct</span><span className="text-gold-400 font-semibold">+5 partial</span>
           </div>
-          <div className="rounded-lg border border-gold-500/30 bg-gold-500/10 px-3 py-2 text-center">
-            <div className="text-gold-300 font-bold text-base">+12</div>
-            <div className="text-cinema-300">All 5 correct</div>
+          <div className="px-3 py-1.5 flex justify-between border-t border-violet-500/20 bg-violet-500/5 text-cinema-300">
+            <span>All 4 correct</span><span className="text-gold-400 font-semibold">+10 sweep</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-cyan-500/30 overflow-hidden">
+          <div className="bg-cyan-500/10 px-3 py-2 font-medium text-cyan-300">✂️ The Cut — 5 cats × 3 pts = 15 base</div>
+          {["Film Editing", "Original Score", "Original Song", "Sound", "Visual Effects"].map((c) => (
+            <div key={c} className="px-3 py-1.5 flex justify-between border-t border-cyan-500/10 text-cinema-200">
+              <span>{c}</span><span className="text-cyan-400">3 pts</span>
+            </div>
+          ))}
+          <div className="px-3 py-1.5 flex justify-between border-t border-cyan-500/20 bg-cyan-500/5 text-cinema-300">
+            <span>3 of 5 correct</span><span className="text-gold-400 font-semibold">+4 partial</span>
+          </div>
+          <div className="px-3 py-1.5 flex justify-between border-t border-cyan-500/20 bg-cyan-500/5 text-cinema-300">
+            <span>All 5 correct</span><span className="text-gold-400 font-semibold">+9 sweep</span>
           </div>
         </div>
       </div>
@@ -166,7 +178,7 @@ function StepVisual({ id }: { id: string }) {
             <div className="text-cinema-300">Wrong pick</div>
           </div>
         </div>
-        <div className="text-center text-cinema-400">190 guild points + 10 Final = <span className="text-gold-400 font-bold">200 maximum</span></div>
+        <div className="text-center text-cinema-400">200 guild points + Final 10 bonus = <span className="text-gold-400 font-bold">210 max possible</span></div>
       </div>
     );
   }
