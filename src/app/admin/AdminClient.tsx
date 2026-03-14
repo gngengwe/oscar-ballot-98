@@ -172,7 +172,7 @@ export default function AdminClient({
       )}
 
       {/* Tab Navigation */}
-      <div className="flex gap-1 overflow-x-auto pb-2 mb-6 border-b border-cinema-700/30">
+      <div className="flex flex-wrap gap-1 pb-2 mb-6 border-b border-cinema-700/30">
         {tabs.map((t) => (
           <button
             key={t.id}
