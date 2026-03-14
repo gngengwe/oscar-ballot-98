@@ -118,7 +118,7 @@ export default function AdminClient({
   scoreDistribution: ScoreDistribution;
   tickerItems: TickerItemData[];
 }) {
-  const [tab, setTab] = useState<Tab>("overview");
+  const [tab, setTab] = useState<Tab>("winners");
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [tickerItems, setTickerItems] = useState(initialTickerItems);
