@@ -172,11 +172,7 @@ export default async function LandingPage() {
                 key={cluster.name}
                 className={`relative rounded-xl p-5 bg-gradient-to-br ${cluster.color} border backdrop-blur-sm`}
               >
-                {"isNew" in cluster && cluster.isNew && (
-                  <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-gold-600/30 text-gold-400 border border-gold-500/30">
-                    New category
-                  </span>
-                )}
+
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl">{cluster.icon}</span>
