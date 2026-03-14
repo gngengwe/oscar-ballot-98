@@ -54,21 +54,23 @@ interface WinnerPublished {
 }
 
 const CLUSTER_STYLES: Record<number, { gradient: string; accent: string; icon: string }> = {
-  1: { gradient: "from-amber-500/15 to-amber-900/5", accent: "text-amber-400", icon: "👑" },
-  2: { gradient: "from-rose-500/15 to-rose-900/5", accent: "text-rose-400", icon: "🎭" },
-  3: { gradient: "from-blue-500/15 to-blue-900/5", accent: "text-blue-400", icon: "✍️" },
-  4: { gradient: "from-emerald-500/15 to-emerald-900/5", accent: "text-emerald-400", icon: "🌍" },
-  5: { gradient: "from-purple-500/15 to-purple-900/5", accent: "text-purple-400", icon: "🎵" },
-  6: { gradient: "from-cyan-500/15 to-cyan-900/5", accent: "text-cyan-400", icon: "🎬" },
+  1: { gradient: "from-amber-500/15 to-amber-900/5",  accent: "text-amber-400",  icon: "👑"  },
+  2: { gradient: "from-rose-500/15 to-rose-900/5",    accent: "text-rose-400",   icon: "🎭"  },
+  3: { gradient: "from-blue-500/15 to-blue-900/5",    accent: "text-blue-400",   icon: "✍️"  },
+  4: { gradient: "from-violet-500/15 to-violet-900/5",accent: "text-violet-400", icon: "👁️" },
+  5: { gradient: "from-cyan-500/15 to-cyan-900/5",    accent: "text-cyan-400",   icon: "✂️"  },
+  6: { gradient: "from-emerald-500/15 to-emerald-900/5", accent: "text-emerald-400", icon: "🌍" },
+  7: { gradient: "from-indigo-500/15 to-indigo-900/5",accent: "text-indigo-400", icon: "🎞️" },
 };
 
 const CLUSTER_BORDERS: Record<number, string> = {
   1: "border-amber-500/30",
   2: "border-rose-500/30",
   3: "border-blue-500/30",
-  4: "border-emerald-500/30",
-  5: "border-purple-500/30",
-  6: "border-cyan-500/30",
+  4: "border-violet-500/30",
+  5: "border-cyan-500/30",
+  6: "border-emerald-500/30",
+  7: "border-indigo-500/30",
 };
 
 export default function BallotClient({
