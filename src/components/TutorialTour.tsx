@@ -328,9 +328,12 @@ export default function TutorialTour() {
             <button
               onClick={() => setStep((s) => Math.max(0, s - 1))}
               disabled={step === 0}
-              className="px-4 py-2 rounded-lg text-sm font-semibold bg-cinema-800 border border-cinema-700 text-cinema-200 hover:bg-cinema-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              aria-label="Previous step"
+              className="w-9 h-9 rounded-full bg-cinema-800 border border-cinema-700/50 text-cinema-200 hover:bg-cinema-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
             >
-              ← Back
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
 
             {/* Dots */}
@@ -355,16 +358,22 @@ export default function TutorialTour() {
             {isLast ? (
               <button
                 onClick={() => setOpen(false)}
-                className="px-4 py-2 rounded-lg text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
+                aria-label="Done"
+                className="w-9 h-9 rounded-full bg-gold-600 text-white hover:bg-gold-500 transition-colors flex items-center justify-center"
               >
-                Done ✓
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
               </button>
             ) : (
               <button
                 onClick={() => setStep((s) => s + 1)}
-                className="px-4 py-2 rounded-lg text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
+                aria-label="Next step"
+                className="w-9 h-9 rounded-full bg-gold-600 text-white hover:bg-gold-500 transition-colors flex items-center justify-center"
               >
-                Next →
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             )}
           </div>
