@@ -153,16 +153,26 @@ export default async function LandingPage() {
               <p className="text-gold-400 font-semibold text-lg mb-6">
                 ⏰ Deadline: <strong>4:00 PM today</strong>
               </p>
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdAA318NaCsFTgBhYWi4cZFB8QgGGuL3uILMwVywvcrSGDzdg/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-10 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-bold text-lg transition-all glow-gold shadow-lg shadow-gold-900/40"
-              >
-                <span>📋</span> Open the Ballot Form
-              </a>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdAA318NaCsFTgBhYWi4cZFB8QgGGuL3uILMwVywvcrSGDzdg/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-10 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-bold text-lg transition-all glow-gold shadow-lg shadow-gold-900/40"
+                >
+                  <span>📋</span> Open the Ballot Form
+                </a>
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1vJm90CfF2HmQBQteYWImVk46k_8DX-ehWa1n0Pk-0oQ/edit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-cinema-800 border border-cinema-600 hover:bg-cinema-700 text-cinema-200 font-semibold text-lg transition-all"
+                >
+                  <span>🏆</span> View Leaderboard
+                </a>
+              </div>
               <p className="mt-4 text-cinema-500 text-xs">
-                Takes about 3 minutes · All 24 categories with nominees listed
+                Ballot form takes ~3 minutes · Leaderboard updates live during the ceremony
               </p>
             </div>
           </div>
