@@ -259,7 +259,7 @@ export default function TutorialTour() {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Progress bar */}
-          <div className="h-1 bg-cinema-800">
+          <div className="h-1 shrink-0 bg-cinema-800">
             <div
               className="h-full bg-gradient-to-r from-gold-600 to-gold-400 transition-all duration-300"
               style={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
@@ -267,7 +267,7 @@ export default function TutorialTour() {
           </div>
 
           {/* Navigation — pinned to top */}
-          <div className="flex items-center justify-between px-6 py-3 border-b border-cinema-700/40">
+          <div className="flex shrink-0 items-center justify-between px-6 py-3 border-b border-cinema-700/40">
             <button
               onClick={() => setStep((s) => Math.max(0, s - 1))}
               disabled={step === 0}
