@@ -59,7 +59,7 @@ export default function Navbar() {
 
             <OscarsPlayer />
 
-            {session ? (
+            {session && (
               <div className="flex items-center gap-3">
                 <Link
                   href="/profile"
@@ -75,21 +75,6 @@ export default function Navbar() {
                 >
                   Sign Out
                 </button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3">
-                <Link
-                  href="/auth/signin"
-                  className="text-sm px-4 py-1.5 rounded-md bg-cinema-800 text-cinema-200 hover:bg-cinema-700 transition-colors"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="text-sm px-4 py-1.5 rounded-md bg-gold-600 text-white hover:bg-gold-500 transition-colors"
-                >
-                  Register
-                </Link>
               </div>
             )}
           </div>
@@ -125,13 +110,8 @@ export default function Navbar() {
               <Link href="/admin" onClick={() => setMobileOpen(false)} className="block py-2 text-cinema-200 hover:text-gold-400">Admin</Link>
             )}
             <button onClick={triggerTutorial} className="block py-2 text-cinema-300 hover:text-gold-400">? Tutorial</button>
-            {session ? (
+            {session && (
               <button onClick={() => signOut()} className="block py-2 text-cinema-300">Sign Out</button>
-            ) : (
-              <>
-                <Link href="/auth/signin" className="block py-2 text-cinema-200">Sign In</Link>
-                <Link href="/auth/register" className="block py-2 text-gold-400">Register</Link>
-              </>
             )}
           </div>
         )}

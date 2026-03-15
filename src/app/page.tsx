@@ -112,18 +112,6 @@ export default async function LandingPage() {
               </p>
 
               <div className="flex items-center justify-center gap-4 mb-12">
-                <Link
-                  href="/auth/register"
-                  className="px-8 py-3 rounded-lg bg-gold-600 text-white font-semibold hover:bg-gold-500 transition-all glow-gold"
-                >
-                  Join the Game
-                </Link>
-                <Link
-                  href="/auth/signin"
-                  className="px-8 py-3 rounded-lg bg-cinema-800 border border-cinema-600 text-cinema-200 font-semibold hover:bg-cinema-700 transition-all"
-                >
-                  Sign In
-                </Link>
                 <TutorialTour />
               </div>
 
@@ -318,7 +306,7 @@ export default async function LandingPage() {
             rel="noopener noreferrer"
             className="text-cinema-700 hover:text-cinema-500 text-xs transition-colors"
           >
-            ·
+            Scoring
           </a>
         </div>
       </div>
