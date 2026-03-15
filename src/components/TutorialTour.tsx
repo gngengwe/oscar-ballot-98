@@ -266,79 +266,28 @@ export default function TutorialTour() {
             />
           </div>
 
-          {/* Navigation — pinned to top */}
-          <div className="flex shrink-0 items-center justify-between px-6 py-3 border-b border-cinema-700/40">
-            <button
-              onClick={() => setStep((s) => Math.max(0, s - 1))}
-              disabled={step === 0}
-              className="px-3 py-1.5 rounded-md text-sm text-cinema-400 hover:text-cinema-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              ← Back
-            </button>
-
-            {/* Dots */}
-            <div className="flex gap-1">
-              {STEPS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setStep(i)}
-                  className="w-1.5 h-1.5 rounded-full transition-all"
-                  style={{
-                    backgroundColor: i === step
-                      ? "rgb(234 179 8 / 0.9)"
-                      : i < step
-                      ? "rgb(234 179 8 / 0.35)"
-                      : "rgb(255 255 255 / 0.2)",
-                    transform: i === step ? "scale(1.4)" : "scale(1)",
-                  }}
-                />
-              ))}
-            </div>
-
-            {isLast ? (
-              <button
-                onClick={() => setOpen(false)}
-                className="px-4 py-1.5 rounded-md text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
-              >
-                Done
-              </button>
-            ) : (
-              <button
-                onClick={() => setStep((s) => s + 1)}
-                className="px-4 py-1.5 rounded-md text-sm font-semibold bg-cinema-800 border border-cinema-700 text-cinema-200 hover:bg-cinema-700 transition-colors"
-              >
-                Next →
-              </button>
-            )}
-          </div>
-
+          {/* Scrollable content */}
           <div className="p-6 overflow-y-auto flex-1">
             {/* Step counter + close */}
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs text-cinema-500 font-mono">
-                {step + 1} / {STEPS.length}
-              </span>
+              <span className="text-xs text-cinema-500 font-mono">{step + 1} / {STEPS.length}</span>
               <button
                 onClick={() => setOpen(false)}
                 className="text-cinema-500 hover:text-cinema-200 transition-colors text-lg leading-none"
                 aria-label="Close tutorial"
-              >
-                ×
-              </button>
+              >×</button>
             </div>
 
             {/* Icon + title */}
             <div className="flex items-center gap-3 mb-3">
               <span className="text-4xl">{current.icon}</span>
-              <h3 className="text-lg font-bold text-cinema-100 leading-tight">
-                {current.title}
-              </h3>
+              <h3 className="text-lg font-bold text-cinema-100 leading-tight">{current.title}</h3>
             </div>
 
             {/* Body */}
             <p className="text-cinema-300 text-sm leading-relaxed">{current.body}</p>
 
-            {/* Cluster grid (step 1) */}
+            {/* Cluster grid */}
             {current.id === "clusters" && current.visual && (
               <div className="mt-4 grid grid-cols-2 gap-2">
                 {(current.visual as { icon: string; name: string; desc: string }[]).map((c) => (
@@ -371,6 +320,52 @@ export default function TutorialTour() {
                   📋 Open the Ballot Form
                 </a>
               </div>
+            )}
+          </div>
+
+          {/* Navigation — pinned to bottom, always visible */}
+          <div className="shrink-0 flex items-center justify-between px-4 py-3 border-t border-cinema-700/40 bg-cinema-900">
+            <button
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              disabled={step === 0}
+              className="px-4 py-2 rounded-lg text-sm font-semibold bg-cinema-800 border border-cinema-700 text-cinema-200 hover:bg-cinema-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              ← Back
+            </button>
+
+            {/* Dots */}
+            <div className="flex gap-1.5">
+              {STEPS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setStep(i)}
+                  className="w-2 h-2 rounded-full transition-all"
+                  style={{
+                    backgroundColor: i === step
+                      ? "rgb(234 179 8 / 0.9)"
+                      : i < step
+                      ? "rgb(234 179 8 / 0.35)"
+                      : "rgb(255 255 255 / 0.2)",
+                    transform: i === step ? "scale(1.3)" : "scale(1)",
+                  }}
+                />
+              ))}
+            </div>
+
+            {isLast ? (
+              <button
+                onClick={() => setOpen(false)}
+                className="px-4 py-2 rounded-lg text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
+              >
+                Done ✓
+              </button>
+            ) : (
+              <button
+                onClick={() => setStep((s) => s + 1)}
+                className="px-4 py-2 rounded-lg text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
+              >
+                Next →
+              </button>
             )}
           </div>
         </div>
