@@ -266,8 +266,54 @@ export default function TutorialTour() {
             />
           </div>
 
+          {/* Navigation — pinned to top */}
+          <div className="flex items-center justify-between px-6 py-3 border-b border-cinema-700/40">
+            <button
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              disabled={step === 0}
+              className="px-3 py-1.5 rounded-md text-sm text-cinema-400 hover:text-cinema-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              ← Back
+            </button>
+
+            {/* Dots */}
+            <div className="flex gap-1">
+              {STEPS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setStep(i)}
+                  className="w-1.5 h-1.5 rounded-full transition-all"
+                  style={{
+                    backgroundColor: i === step
+                      ? "rgb(234 179 8 / 0.9)"
+                      : i < step
+                      ? "rgb(234 179 8 / 0.35)"
+                      : "rgb(255 255 255 / 0.2)",
+                    transform: i === step ? "scale(1.4)" : "scale(1)",
+                  }}
+                />
+              ))}
+            </div>
+
+            {isLast ? (
+              <button
+                onClick={() => setOpen(false)}
+                className="px-4 py-1.5 rounded-md text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
+              >
+                Done
+              </button>
+            ) : (
+              <button
+                onClick={() => setStep((s) => s + 1)}
+                className="px-4 py-1.5 rounded-md text-sm font-semibold bg-cinema-800 border border-cinema-700 text-cinema-200 hover:bg-cinema-700 transition-colors"
+              >
+                Next →
+              </button>
+            )}
+          </div>
+
           <div className="p-6 overflow-y-auto flex-1">
-            {/* Step counter */}
+            {/* Step counter + close */}
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs text-cinema-500 font-mono">
                 {step + 1} / {STEPS.length}
@@ -326,52 +372,6 @@ export default function TutorialTour() {
                 </a>
               </div>
             )}
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-5">
-              <button
-                onClick={() => setStep((s) => Math.max(0, s - 1))}
-                disabled={step === 0}
-                className="px-3 py-1.5 rounded-md text-sm text-cinema-400 hover:text-cinema-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                ← Back
-              </button>
-
-              {/* Dots */}
-              <div className="flex gap-1">
-                {STEPS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setStep(i)}
-                    className="w-1.5 h-1.5 rounded-full transition-all"
-                    style={{
-                      backgroundColor: i === step
-                        ? "rgb(234 179 8 / 0.9)"
-                        : i < step
-                        ? "rgb(234 179 8 / 0.35)"
-                        : "rgb(255 255 255 / 0.2)",
-                      transform: i === step ? "scale(1.4)" : "scale(1)",
-                    }}
-                  />
-                ))}
-              </div>
-
-              {isLast ? (
-                <button
-                  onClick={() => setOpen(false)}
-                  className="px-4 py-1.5 rounded-md text-sm font-semibold bg-gold-600 text-white hover:bg-gold-500 transition-colors"
-                >
-                  Done
-                </button>
-              ) : (
-                <button
-                  onClick={() => setStep((s) => s + 1)}
-                  className="px-4 py-1.5 rounded-md text-sm font-semibold bg-cinema-800 border border-cinema-700 text-cinema-200 hover:bg-cinema-700 transition-colors"
-                >
-                  Next →
-                </button>
-              )}
-            </div>
           </div>
         </div>
       </div>
