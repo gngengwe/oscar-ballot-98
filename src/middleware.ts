@@ -27,7 +27,5 @@ export const config = {
   matcher: [
     "/ballot/:path*",
     "/leaderboard/:path*",
-    "/admin/:path*",
-    "/api/admin/:path*",
   ],
 };
