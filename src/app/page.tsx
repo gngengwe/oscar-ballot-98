@@ -174,6 +174,14 @@ export default async function LandingPage() {
               <p className="mt-4 text-cinema-500 text-xs">
                 Ballot form takes ~3 minutes · Leaderboard updates live during the ceremony
               </p>
+              <a
+                href="https://docs.google.com/spreadsheets/d/1vJm90CfF2HmQBQteYWImVk46k_8DX-ehWa1n0Pk-0oQ/edit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-block text-cinema-700 hover:text-cinema-500 text-xs transition-colors"
+              >
+                Organiser scoring sheet
+              </a>
             </div>
           </div>
         </section>
@@ -308,17 +316,6 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        {/* Admin link — subtle, for organiser use */}
-        <div className="max-w-5xl mx-auto px-6 pb-8 text-center">
-          <a
-            href="https://docs.google.com/spreadsheets/d/1vJm90CfF2HmQBQteYWImVk46k_8DX-ehWa1n0Pk-0oQ/edit"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-cinema-700 hover:text-cinema-500 text-xs transition-colors"
-          >
-            Scoring
-          </a>
-        </div>
       </div>
 
       {/* Sidebar */}

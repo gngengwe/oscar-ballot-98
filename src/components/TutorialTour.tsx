@@ -255,7 +255,7 @@ export default function TutorialTour() {
       {/* Tour bubble */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
         <div
-          className="pointer-events-auto w-full max-w-sm rounded-2xl bg-cinema-900 border border-cinema-700/60 shadow-2xl overflow-hidden"
+          className="pointer-events-auto w-full max-w-sm rounded-2xl bg-cinema-900 border border-cinema-700/60 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Progress bar */}
@@ -266,7 +266,7 @@ export default function TutorialTour() {
             />
           </div>
 
-          <div className="p-6">
+          <div className="p-6 overflow-y-auto flex-1">
             {/* Step counter */}
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs text-cinema-500 font-mono">
@@ -314,20 +314,15 @@ export default function TutorialTour() {
 
             {/* CTA step */}
             {current.id === "ready" && (
-              <div className="mt-4 flex gap-2">
+              <div className="mt-4">
                 <a
-                  href="/auth/register"
-                  className="flex-1 text-center py-2.5 rounded-lg bg-gold-600 text-white font-semibold text-sm hover:bg-gold-500 transition-colors"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdAA318NaCsFTgBhYWi4cZFB8QgGGuL3uILMwVywvcrSGDzdg/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full text-center justify-center py-2.5 rounded-lg bg-gold-600 text-white font-semibold text-sm hover:bg-gold-500 transition-colors"
                   onClick={() => setOpen(false)}
                 >
-                  Create Account
-                </a>
-                <a
-                  href="/auth/signin"
-                  className="flex-1 text-center py-2.5 rounded-lg bg-cinema-800 border border-cinema-700 text-cinema-200 text-sm hover:bg-cinema-700 transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  Sign In
+                  📋 Open the Ballot Form
                 </a>
               </div>
             )}
