@@ -150,6 +150,36 @@ export default async function LandingPage() {
           </div>
         </section>
 
+        {/* ── SUBMIT PICKS BANNER ── */}
+        <section className="max-w-5xl mx-auto px-6 pb-4">
+          <div className="relative rounded-2xl overflow-hidden border border-gold-500/40 bg-gradient-to-br from-gold-600/15 via-cinema-900 to-cinema-950 p-8 text-center">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent pointer-events-none" />
+            <div className="relative">
+              <p className="text-xs font-bold uppercase tracking-widest text-gold-500 mb-2">🎬 98th Academy Awards — Tonight</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                Submit Your Picks
+              </h2>
+              <p className="text-cinema-300 mb-2 max-w-xl mx-auto">
+                Fill in all 24 categories, wager your Final 10, and lock in your ballot before the ceremony starts.
+              </p>
+              <p className="text-gold-400 font-semibold text-lg mb-6">
+                ⏰ Deadline: <strong>4:00 PM today</strong>
+              </p>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdAA318NaCsFTgBhYWi4cZFB8QgGGuL3uILMwVywvcrSGDzdg/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-10 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-bold text-lg transition-all glow-gold shadow-lg shadow-gold-900/40"
+              >
+                <span>📋</span> Open the Ballot Form
+              </a>
+              <p className="mt-4 text-cinema-500 text-xs">
+                Takes about 3 minutes · All 24 categories with nominees listed
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Nominee Image Carousel */}
         <section className="max-w-5xl mx-auto px-6 pb-10">
           <NomineeCarousel />
@@ -279,6 +309,18 @@ export default async function LandingPage() {
             </ol>
           </div>
         </section>
+
+        {/* Admin link — subtle, for organiser use */}
+        <div className="max-w-5xl mx-auto px-6 pb-8 text-center">
+          <a
+            href="https://docs.google.com/spreadsheets/d/1vJm90CfF2HmQBQteYWImVk46k_8DX-ehWa1n0Pk-0oQ/edit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cinema-700 hover:text-cinema-500 text-xs transition-colors"
+          >
+            ·
+          </a>
+        </div>
       </div>
 
       {/* Sidebar */}
