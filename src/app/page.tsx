@@ -163,7 +163,7 @@ export default async function LandingPage() {
                   <span>📋</span> Open the Ballot Form
                 </a>
                 <a
-                  href="https://docs.google.com/spreadsheets/d/1vJm90CfF2HmQBQteYWImVk46k_8DX-ehWa1n0Pk-0oQ/edit"
+                  href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQUsHaVHRPnRUyyxHOg0L08WI9rVfwOu7wswC6HJkpI7l6UNhOs0Zo4aXHfqUXbPSF0xhhys44wPxQA/pubhtml"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-cinema-800 border border-cinema-600 hover:bg-cinema-700 text-cinema-200 font-semibold text-lg transition-all"
